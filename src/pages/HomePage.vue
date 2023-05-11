@@ -15,8 +15,9 @@
         <p>Q. {{ faq.question }}</p>
         <p>{{ faq.answer }}</p>
       </div>
-      <div>
+      <div class="flex flex-col items-center">
         <button @click="openEditModal(index)">Edit</button>
+        <button class="text-red-700" @click="openDeleteModal">x</button>
       </div>
     </div>
   </section>
@@ -48,11 +49,17 @@
     </template>
   </Modal>
   <EditFaq v-if="showEditModal" :faq="editFaq" :close-edit="closeEditModal" />
+  <DeleteFaq
+    v-if="showDeleteModal"
+    :faqId="delFaqId"
+    :close-delete="closeDeleteModal"
+  />
 </template>
 
 <script setup>
 import Modal from '../components/modal/modal.vue';
 import EditFaq from '../components/edit/editFaq.vue';
+import DeleteFaq from '../components/delete/deleteFaq.vue';
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 
@@ -93,5 +100,15 @@ function openEditModal(editPosition) {
 }
 function closeEditModal() {
   showEditModal.value = false;
+}
+
+const showDeleteModal = ref(false);
+const delFaqId = ref({});
+function openDeleteModal(editPosition) {
+  delFaqId.value = editPosition;
+  showDeleteModal.value = true;
+}
+function closeDeleteModal() {
+  showDeleteModal.value = false;
 }
 </script>
