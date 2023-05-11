@@ -20,9 +20,9 @@
       </button>
       <button
         class="border border-black px-2 rounded ml-2"
-        @click="handleEditFaq"
+        @click="handleCreate"
       >
-        Save
+        Create
       </button>
     </template>
   </Modal>
@@ -32,23 +32,25 @@
 import Modal from '../modal/modal.vue';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
-const { faq, closeEdit } = defineProps(['faq', 'closeEdit']);
+const { closeCreate } = defineProps(['closeCreate']);
 const store = useStore();
 
 function closeModal() {
-  closeEdit();
+  closeCreate();
 }
 
-const question = ref(faq.question);
-const answer = ref(faq.answer);
-function handleEditFaq() {
-  store.dispatch('editFaq', {
-    id: faq.id,
-    faq: {
-      question,
-      answer,
-    },
-  });
-  closeModal();
-}
+const question = ref('');
+const answer = ref('');
+const handleCreate = () => {
+  if (question.value.trim() && answer.value.trim()) {
+    store.dispatch('createFaq', {
+      question: question.value,
+      answer: answer.value,
+    });
+
+    question.value = '';
+    answer.value = '';
+    closeModal();
+  }
+};
 </script>

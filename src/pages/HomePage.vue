@@ -21,33 +21,7 @@
       </div>
     </div>
   </section>
-  <Modal v-if="showFaqModal">
-    <template #content>
-      <input
-        type="text"
-        placeholder="Enter Question"
-        class="border-b border-black outline-none pb-1 mb-3"
-        v-model="question"
-      />
-      <input
-        type="text"
-        placeholder="Enter Answer"
-        class="border-b border-black outline-none pb-1 mb-3"
-        v-model="answer"
-      />
-    </template>
-    <template #footer>
-      <button class="border border-black px-2 rounded" @click="closeModal">
-        Cancel
-      </button>
-      <button
-        class="border border-black px-2 rounded ml-2"
-        @click="handleCreate"
-      >
-        Create
-      </button>
-    </template>
-  </Modal>
+  <CreateFaq v-if="showCreateModal" :close-create="closeCreateModal" />
   <EditFaq v-if="showEditModal" :faq="editFaq" :close-edit="closeEditModal" />
   <DeleteFaq
     v-if="showDeleteModal"
@@ -58,6 +32,7 @@
 
 <script setup>
 import Modal from '../components/modal/modal.vue';
+import CreateFaq from '../components/create/createFaq.vue';
 import EditFaq from '../components/edit/editFaq.vue';
 import DeleteFaq from '../components/delete/deleteFaq.vue';
 import { ref, computed } from 'vue';
@@ -65,28 +40,13 @@ import { useStore } from 'vuex';
 
 const store = useStore();
 
-const showFaqModal = ref(false);
+const showCreateModal = ref(false);
 function handleModal() {
-  showFaqModal.value = !showFaqModal.value;
+  showCreateModal.value = true;
 }
-function closeModal() {
-  showFaqModal.value = false;
+function closeCreateModal() {
+  showCreateModal.value = false;
 }
-
-const question = ref('');
-const answer = ref('');
-const handleCreate = () => {
-  if (question.value.trim() && answer.value.trim()) {
-    store.dispatch('createFaq', {
-      question: question.value,
-      answer: answer.value,
-    });
-
-    question.value = '';
-    answer.value = '';
-    closeModal();
-  }
-};
 
 const faqData = computed(() => store.state.faqList);
 
