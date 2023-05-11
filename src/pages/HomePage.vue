@@ -17,7 +17,7 @@
       </div>
       <div class="flex flex-col items-center">
         <button @click="openEditModal(index)">Edit</button>
-        <button class="text-red-700" @click="openDeleteModal">x</button>
+        <button class="text-red-700" @click="openDeleteModal(index)">x</button>
       </div>
     </div>
   </section>
