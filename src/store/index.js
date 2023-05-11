@@ -27,15 +27,15 @@ const mutations = {
   },
   createFaq(state, data) {
     state.faqList.push(data);
-    localStorage.setItem('faq', state.faqList);
+    localStorage.setItem('faq', JSON.stringify(state.faqList));
   },
   editFaq(state, data) {
     state.faqList[data.id] = data.faq;
-    localStorage.setItem('faq', state.faqList);
+    localStorage.setItem('faq', JSON.stringify(state.faqList));
   },
   deleteFaq(state, data) {
     state.faqList = state.faqList.filter((faq, index) => index !== data.id);
-    localStorage.setItem('faq', state.faqList);
+    localStorage.setItem('faq', JSON.stringify(state.faqList));
   },
 };
 
