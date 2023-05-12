@@ -6,19 +6,34 @@
     Create FAQ
   </button>
   <section class="px-4">
-    <header class="sm:text-center text-2xl">FAQ</header>
-    <div
-      v-for="(faq, index) in faqData"
-      class="w-full rounded shadow-md h-full p-4 mb-1 flex justify-between"
-    >
-      <div class="w-11/12">
-        <p>Q. {{ faq.question }}</p>
-        <p>{{ faq.answer }}</p>
-      </div>
-      <div class="flex flex-col items-center">
-        <button @click="openEditModal(index)">Edit</button>
-        <button class="text-red-700" @click="openDeleteModal(index)">x</button>
-      </div>
+    <header class="sm:text-center text-2xl mb-4">FAQ</header>
+    <div v-for="(faq, index) in faqData">
+      <Accordian>
+        <template #header>
+          <div class="flex items-center w-full">
+            <p class="flex-grow mr-1 break-all">Q. {{ faq.question }}</p>
+            <img
+              width="16"
+              height="16"
+              src="https://img.icons8.com/ios-filled/50/pencil-tip.png"
+              alt="pencil-tip"
+              @click="openEditModal(index)"
+              class="mr-1 cursor-pointer"
+            />
+            <img
+              width="16"
+              height="16"
+              src="https://img.icons8.com/ios-filled/50/000000/trash.png"
+              alt="trash"
+              @click="openDeleteModal(index)"
+              class="mr-1 cursor-pointer"
+            />
+          </div>
+        </template>
+        <template #footer>
+          <p>{{ faq.answer }}</p>
+        </template>
+      </Accordian>
     </div>
   </section>
   <CreateFaq v-if="showCreateModal" :close-create="closeCreateModal" />
@@ -37,6 +52,7 @@ import EditFaq from '../components/edit/editFaq.vue';
 import DeleteFaq from '../components/delete/deleteFaq.vue';
 import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
+import Accordian from '../components/accordian/accordian.vue';
 
 const store = useStore();
 
