@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Verify Git installation
+        run: git --version
+    
       - name: Checkout repository
         uses: actions/checkout@v2
 
