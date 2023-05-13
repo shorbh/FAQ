@@ -20,12 +20,12 @@
           />
         </span>
       </div>
-      <hr v-if="showAnswer" class="border border-gray-300 mt-2 mb-3" />
-      <Transition name="fade">
+      <TransitionGroup name="fade">
+        <hr v-if="showAnswer" class="border border-gray-300 mt-2 mb-3" />
         <div v-if="showAnswer" class="w-full break-words">
           <slot name="footer" />
         </div>
-      </Transition>
+      </TransitionGroup>
     </section>
   </main>
 </template>

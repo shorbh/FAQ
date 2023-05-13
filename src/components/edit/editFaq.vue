@@ -6,6 +6,7 @@
         placeholder="Enter Question"
         class="border-b border-black outline-none pb-1 mb-3"
         v-model="question"
+        v-focus
       />
       <input
         type="text"
@@ -15,11 +16,14 @@
       />
     </template>
     <template #footer>
-      <button class="border border-black px-2 rounded" @click="closeModal">
+      <button
+        class="border border-black px-2 rounded active:bg-gray-100"
+        @click="closeModal"
+      >
         Cancel
       </button>
       <button
-        class="border border-black px-2 rounded ml-2"
+        class="border border-black px-2 rounded ml-2 active:bg-green-100"
         @click="handleEditFaq"
       >
         Save

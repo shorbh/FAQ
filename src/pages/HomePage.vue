@@ -1,40 +1,52 @@
 <template>
   <button
     @click="handleModal"
-    class="fixed right-4 top-2 border border-black px-2 py-1 rounded-md ml-2"
+    class="
+      fixed
+      right-4
+      top-2
+      border border-black
+      px-2
+      py-1
+      rounded-md
+      ml-2
+      active:bg-gray-100
+    "
   >
     Create FAQ
   </button>
-  <section class="px-4">
+  <section class="px-4 md:w-4/5 md:my-0 md:mx-auto">
     <header class="sm:text-center text-2xl mb-4">FAQ</header>
-    <div v-for="(faq, index) in faqData">
-      <Accordian>
-        <template #header>
-          <div class="flex items-center w-full">
-            <p class="flex-grow mr-1 break-all">Q. {{ faq.question }}</p>
-            <img
-              width="16"
-              height="16"
-              src="https://img.icons8.com/ios-filled/50/pencil-tip.png"
-              alt="pencil-tip"
-              @click="openEditModal(index)"
-              class="mr-1 cursor-pointer"
-            />
-            <img
-              width="16"
-              height="16"
-              src="https://img.icons8.com/ios-filled/50/000000/trash.png"
-              alt="trash"
-              @click="openDeleteModal(index)"
-              class="mr-1 cursor-pointer"
-            />
-          </div>
-        </template>
-        <template #footer>
-          <p>{{ faq.answer }}</p>
-        </template>
-      </Accordian>
-    </div>
+    <TransitionGroup name="list">
+      <div v-for="(faq, index) in faqData" :key="index">
+        <Accordian>
+          <template #header>
+            <div class="flex items-center w-full">
+              <p class="flex-grow mr-1 break-all">Q. {{ faq.question }}</p>
+              <img
+                width="16"
+                height="16"
+                src="https://img.icons8.com/ios-filled/50/pencil-tip.png"
+                alt="pencil-tip"
+                @click="openEditModal(index)"
+                class="mr-1 cursor-pointer"
+              />
+              <img
+                width="16"
+                height="16"
+                src="https://img.icons8.com/ios-filled/50/000000/trash.png"
+                alt="trash"
+                @click="openDeleteModal(index)"
+                class="mr-1 cursor-pointer"
+              />
+            </div>
+          </template>
+          <template #footer>
+            <p>{{ faq.answer }}</p>
+          </template>
+        </Accordian>
+      </div>
+    </TransitionGroup>
   </section>
   <CreateFaq v-if="showCreateModal" :close-create="closeCreateModal" />
   <EditFaq v-if="showEditModal" :faq="editFaq" :close-edit="closeEditModal" />
@@ -88,3 +100,15 @@ function closeDeleteModal() {
   showDeleteModal.value = false;
 }
 </script>
+
+<style>
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+</style>

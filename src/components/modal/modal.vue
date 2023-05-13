@@ -1,16 +1,16 @@
 <template>
   <main
     class="
-      absolute
+      fixed
       flex
       justify-center
       items-center
       bg-gray-400
-      w-full
-      h-full
       top-0
+      bottom-0
+      right-0
+      left-0
       bg-opacity-20
-      active:overflow-hidden
     "
   >
     <section class="p-4 bg-white rounded-md w-1/2">

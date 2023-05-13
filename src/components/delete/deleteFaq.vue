@@ -4,11 +4,14 @@
       <p>Are you sure you want to delete?</p>
     </template>
     <template #footer>
-      <button class="border border-black px-2 rounded" @click="closeModal">
+      <button
+        class="border border-black px-2 rounded active:bg-gray-100"
+        @click="closeModal"
+      >
         Cancel
       </button>
       <button
-        class="border border-black px-2 rounded ml-2"
+        class="border border-black px-2 rounded ml-2 active:bg-red-100"
         @click="handleDeleteFaq"
       >
         Confirm
